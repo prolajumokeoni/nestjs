@@ -28,6 +28,7 @@ findOne(id: string) {
 
 create(createCoffeeDto: any) {
 	this.coffees.push(createCoffeeDto);
+	return createCoffeeDto;
 }
 
 update( id: string, updateCoffeeDto: any) {
