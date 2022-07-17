@@ -11,6 +11,7 @@ import {
 import { CoffeesService } from './coffees.service';
 import { CreateCoffeeDto } from './dto/create-coffee.dto';
 import { UpdateCoffeeDto } from './dto/update-coffee.dto';
+import { PaginationQueryDto } from '../common/dto/pagination-query.dto';
 
 //PUT REPLACES THE ENTIRE RESOURCE, YOU NEED TO HAVE THE OBJECT WITHIN THE REQUEST IN THE PAYLOAD, PATCH MODIFY A RESOURCE PARTIALLY
 
@@ -20,15 +21,15 @@ export class CoffeesController {
 
   @Get()
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  findAll(@Query() paginationQuery) {
+  findAll(@Query() paginationQuery: PaginationQueryDto) {
     // const { limit, offset } = paginationQuery;
     // return `This should return all coffees. Limit: ${limit}, offset: ${offset}`;
-    return this.coffeeService.findAll();
+    return this.coffeeService.findAll(paginationQuery);
   }
 
   @Get(':id')
-  findOneBy(@Param('id') id: string) {
-    return this.coffeeService.findOneBy({ id: id });
+  findOneOrFail(@Param('id') id: string) {
+    return this.coffeeService.findOneOrFail({ id: id });
   }
 
   @Post()
